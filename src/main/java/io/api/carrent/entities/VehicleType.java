@@ -1,13 +1,11 @@
 package io.api.carrent.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @Table(name = "vehicle_types")
 public class VehicleType {

@@ -2,9 +2,8 @@ package io.api.carrent.entities;
 
 import io.api.carrent.dto.output.UserDTO;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,9 +13,8 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
+@Data
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
@@ -78,6 +76,7 @@ public class User implements UserDetails {
                 this.name,
                 this.email,
                 this.flActive,
+                this.roles.stream().map(Role::getName).toList(),
                 this.createdAt
         );
     }

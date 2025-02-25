@@ -1,16 +1,14 @@
 package io.api.carrent.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+@Data
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @Table(name = "vehicles")
 public class Vehicle {
@@ -33,11 +31,29 @@ public class Vehicle {
     @Column(nullable = false)
     private Float odometer;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "vehicle_type_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vehicle_type_id", referencedColumnName = "id", nullable = false)
     private VehicleType vehicleType;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    public Vehicle(String plate, String brand, String model, Integer year, Float odometer, VehicleType vehicleType) {
+        this.plate = plate;
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.odometer = odometer;
+        this.vehicleType = vehicleType;
+    }
+
+    public void update(String plate, String brand, String model, Integer year, Float odometer, VehicleType vehicleType) {
+        this.plate = plate;
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.odometer = odometer;
+        this.vehicleType = vehicleType;
+    }
 }

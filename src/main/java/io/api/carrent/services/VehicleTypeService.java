@@ -36,14 +36,10 @@ public class VehicleTypeService {
     }
 
     public VehicleType update(Integer vehicleTypeId, SaveVehicleTypeDTO vehicleTypeDTO) {
-        Optional<VehicleType> vehicleTypeOptional = vehicleTypeRepository.findById(vehicleTypeId);
+        VehicleType vehicleType = vehicleTypeRepository.findById(vehicleTypeId)
+                .orElseThrow(() -> new NotFoundException("Tipo de veículo não encontrado."));
 
-        if (vehicleTypeOptional.isEmpty()) {
-            throw new NotFoundException("Tipo de veículo não encontrado.");
-        }
-
-        VehicleType vehicleType = vehicleTypeOptional.get();
-        vehicleTypeOptional = vehicleTypeRepository.findByName(vehicleTypeDTO.name());
+        Optional<VehicleType> vehicleTypeOptional = vehicleTypeRepository.findByName(vehicleTypeDTO.name());
 
         boolean isOtherVehicleType = vehicleTypeOptional.isPresent()
                 && !vehicleType.getId().equals(vehicleTypeOptional.get().getId());
@@ -58,13 +54,9 @@ public class VehicleTypeService {
     }
 
     public void delete(Integer vehicleTypeId) {
-        Optional<VehicleType> vehicleTypeOptional = vehicleTypeRepository.findById(vehicleTypeId);
+        VehicleType vehicleType = vehicleTypeRepository.findById(vehicleTypeId)
+                .orElseThrow(() -> new NotFoundException("Tipo de veículo não encontrado."));
 
-        if (vehicleTypeOptional.isEmpty()) {
-            throw new NotFoundException("Tipo de veículo não encontrado.");
-        }
-
-        VehicleType vehicleType = vehicleTypeOptional.get();
         List<Vehicle> vehicles = vehicleRepository.findAllByVehicleType(vehicleType.getId());
 
         if (!vehicles.isEmpty()) {
