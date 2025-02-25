@@ -19,7 +19,10 @@ public interface VehicleJpaRepository extends JpaRepository<Vehicle, Long> {
             v.model,
             v.year,
             v.odometer,
-            v.vehicleType.name
+            v.vehicleType.name,
+            v.status,
+            v.flActive,
+            v.createdAt
         )
         FROM Vehicle v
         INNER JOIN v.vehicleType

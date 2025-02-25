@@ -1,6 +1,6 @@
 package io.api.carrent.dto.output;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 public record UserDTO(
@@ -9,5 +9,5 @@ public record UserDTO(
         String email,
         Boolean flActive,
         List<String> roles,
-        LocalDateTime createdAt
+        Instant createdAt
 ) {}

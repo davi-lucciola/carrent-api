@@ -68,4 +68,16 @@ public class VehicleService {
         vehicleRepository.saveAndFlush(vehicle);
         return vehicle;
     }
+
+    public void activate(Long vehicleId) {
+        Vehicle vehicle = this.findById(vehicleId);
+        vehicle.activate();
+        vehicleRepository.save(vehicle);
+    }
+
+    public void deactivate(Long vehicleId) {
+        Vehicle vehicle = this.findById(vehicleId);
+        vehicle.deactivate();
+        vehicleRepository.save(vehicle);
+    }
 }

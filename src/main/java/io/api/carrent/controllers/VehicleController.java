@@ -1,6 +1,7 @@
 package io.api.carrent.controllers;
 
 import io.api.carrent.dto.input.SaveVehicleDTO;
+import io.api.carrent.dto.output.MessageDTO;
 import io.api.carrent.dto.output.VehicleDTO;
 import io.api.carrent.entities.Vehicle;
 import io.api.carrent.services.VehicleService;
@@ -57,5 +58,23 @@ public class VehicleController {
             @PathVariable Long id, @RequestBody @Valid SaveVehicleDTO saveVehicleDTO
     ) {
         return new ResponseEntity<>(vehicleService.update(id, saveVehicleDTO), HttpStatus.ACCEPTED);
+    }
+
+    @PatchMapping("/{id}/activate")
+    @PreAuthorize(ROLE_ADMIN)
+    @SecurityRequirement(name = SECURITY_BEARER)
+    @Operation(description = "Ativa um veículo desativado. (ADMIN)")
+    public ResponseEntity<MessageDTO> activateVehicle(@PathVariable Long id) {
+        vehicleService.activate(id);
+        return new ResponseEntity<>(new MessageDTO("Veículo ativado com sucesso."), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}/deactivate")
+    @PreAuthorize(ROLE_ADMIN)
+    @SecurityRequirement(name = SECURITY_BEARER)
+    @Operation(description = "Desativa um veículo ativo. (ADMIN)")
+    public ResponseEntity<MessageDTO> deactivateVehicle(@PathVariable Long id) {
+        vehicleService.deactivate(id);
+        return new ResponseEntity<>(new MessageDTO("Veículo desativado com sucesso."), HttpStatus.ACCEPTED);
     }
 }

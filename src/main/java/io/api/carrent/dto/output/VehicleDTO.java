@@ -1,6 +1,8 @@
 package io.api.carrent.dto.output;
 
-import io.api.carrent.entities.VehicleType;
+import io.api.carrent.entities.enums.VehicleStatus;
+
+import java.time.Instant;
 
 public record VehicleDTO(
         Long id,
@@ -9,6 +11,8 @@ public record VehicleDTO(
         String model,
         Integer year,
         Float odometer,
-        String vehicleType
-) {
-}
+        String vehicleType,
+        VehicleStatus status,
+        Boolean flActive,
+        Instant createdAt
+) {}

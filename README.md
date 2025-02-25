@@ -1,10 +1,21 @@
 # Carrent API
 
-API para gerenciar o aluguel de veículos.
+API para gerenciar uma frota de veículos e possibilitar o aluguel desses veículos.
 
 ## Documentação
 
-Para acessar a documentação localmente basta acessar a url http://localhost:8080/swagger-ui/index.html
+Para acessar a documentação do swagger localmente basta clicar [aqui](http://localhost:8080/swagger-ui/index.html).
+
+Ou acessar o endereço abaixo:
+> http://localhost:8080/swagger-ui/index.html
+
+## Tecnologias
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 
 ## Funcionalidades
 
@@ -13,11 +24,11 @@ Para acessar a documentação localmente basta acessar a url http://localhost:80
   - [x] Login (com JWT)
 
 - [ ] Gerenciamento de Veículos (Admin)
-    - [ ] CRUD de Veículos
-    - [ ] Confirmar solicitação (SOLICITADO -> ALUGADO)
-    - [ ] Confirmar devolução (DEVOLVIDO -> DISPONIVEL)
+    - [x] CRUD de Veículos
+    - [x] CRUD de Tipos de Veículos
+    - [ ] Confirmar reserva (RESERVADO -> ALUGADO)
+    - [ ] Confirmar devolução (ALUGADO -> DISPONIVEL)
 
 - [ ] Aluguel de Veículos (Geral)
-  - [ ] Solicitar aluguel do veículo (DISPONIVEL -> SOLICITADO)
-  - [ ] Entregar veículo alugado (ALUGADO -> DEVOLVIDO)
+  - [ ] Solicitar aluguel do veículo (DISPONIVEL -> RESERVADO)
   
