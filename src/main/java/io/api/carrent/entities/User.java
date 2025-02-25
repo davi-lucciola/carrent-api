@@ -1,5 +1,6 @@
 package io.api.carrent.entities;
 
+import io.api.carrent.dto.output.UserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,5 +70,15 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
+    }
+
+    public UserDTO toDTO() {
+        return new UserDTO(
+                this.id,
+                this.name,
+                this.email,
+                this.flActive,
+                this.createdAt
+        );
     }
 }

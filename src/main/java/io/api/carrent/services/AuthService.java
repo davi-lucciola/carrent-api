@@ -3,19 +3,16 @@ package io.api.carrent.services;
 import io.api.carrent.dto.input.LoginDTO;
 import io.api.carrent.dto.output.AuthDTO;
 import io.api.carrent.entities.User;
-import io.api.carrent.repositories.UserJpaRepository;
 import io.api.carrent.security.jwt.JwtProprieties;
 import io.api.carrent.security.jwt.JwtService;
 import io.api.carrent.security.jwt.JwtUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

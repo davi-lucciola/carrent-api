@@ -1,6 +1,14 @@
 services:
-  #  carrent:
-  #    container_name: "carrent"
+  api:
+    container_name: carrent-api
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - private_network
 
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
