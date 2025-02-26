@@ -31,8 +31,7 @@ public class VehicleTypeService {
         }
 
         VehicleType vehicleType = new VehicleType(vehicleTypeDTO.name());
-        vehicleTypeRepository.saveAndFlush(vehicleType);
-        return vehicleType;
+        return vehicleTypeRepository.save(vehicleType);
     }
 
     public VehicleType update(Integer vehicleTypeId, SaveVehicleTypeDTO vehicleTypeDTO) {
@@ -49,8 +48,7 @@ public class VehicleTypeService {
         }
 
         vehicleType.setName(vehicleTypeDTO.name());
-        vehicleTypeRepository.saveAndFlush(vehicleType);
-        return vehicleType;
+        return vehicleTypeRepository.save(vehicleType);
     }
 
     public void delete(Integer vehicleTypeId) {

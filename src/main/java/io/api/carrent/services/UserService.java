@@ -27,8 +27,6 @@ public class UserService {
         User user = new User(userDTO.name(),
                 userDTO.email(), passwordEncoder.encode(userDTO.password()));
 
-        userRepository.saveAndFlush(user);
-
-        return user.toDTO();
+        return userRepository.save(user).toDTO();
     }
 }

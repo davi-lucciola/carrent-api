@@ -43,8 +43,7 @@ public class VehicleService {
         Vehicle vehicle = new Vehicle(saveVehicleDTO.plate(), saveVehicleDTO.brand(),
                 saveVehicleDTO.model(), saveVehicleDTO.year(), saveVehicleDTO.odometer(), vehicleType);
 
-        vehicleRepository.saveAndFlush(vehicle);
-        return vehicle;
+        return vehicleRepository.save(vehicle);
     }
 
     public Vehicle update(Long vehicleId, SaveVehicleDTO saveVehicleDTO) {
@@ -65,8 +64,7 @@ public class VehicleService {
         vehicle.update(saveVehicleDTO.plate(), saveVehicleDTO.brand(),
                 saveVehicleDTO.model(), saveVehicleDTO.year(), saveVehicleDTO.odometer(), vehicleType);
 
-        vehicleRepository.saveAndFlush(vehicle);
-        return vehicle;
+        return vehicleRepository.save(vehicle);
     }
 
     public void activate(Long vehicleId) {

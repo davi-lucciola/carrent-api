@@ -16,6 +16,11 @@ public class VehicleType {
     @Column(nullable = false, unique = true)
     private String name;
 
+    public VehicleType(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public VehicleType(String name) {
         this.name = name;
     }
