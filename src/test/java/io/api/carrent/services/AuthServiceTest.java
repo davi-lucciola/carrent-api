@@ -1,11 +1,12 @@
 package io.api.carrent.services;
 
-import io.api.carrent.dto.input.LoginDTO;
-import io.api.carrent.dto.output.AuthDTO;
-import io.api.carrent.entities.User;
-import io.api.carrent.security.jwt.JwtProprieties;
-import io.api.carrent.security.jwt.JwtService;
-import io.api.carrent.security.jwt.JwtUserDetailService;
+import io.api.carrent.domain.services.AuthService;
+import io.api.carrent.domain.dto.input.LoginDTO;
+import io.api.carrent.domain.dto.output.AuthDTO;
+import io.api.carrent.domain.entities.User;
+import io.api.carrent.infra.jwt.JwtProprieties;
+import io.api.carrent.infra.jwt.JwtService;
+import io.api.carrent.infra.jwt.JwtUserDetailService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,12 +1,13 @@
 package io.api.carrent.services;
 
-import io.api.carrent.dto.input.CreateUserDTO;
-import io.api.carrent.dto.output.UserDTO;
-import io.api.carrent.entities.Role;
-import io.api.carrent.entities.User;
-import io.api.carrent.entities.enums.Roles;
-import io.api.carrent.exceptions.DomainException;
-import io.api.carrent.repositories.UserJpaRepository;
+import io.api.carrent.domain.services.UserService;
+import io.api.carrent.domain.dto.input.CreateUserDTO;
+import io.api.carrent.domain.dto.output.UserDTO;
+import io.api.carrent.domain.entities.Role;
+import io.api.carrent.domain.entities.User;
+import io.api.carrent.domain.enums.Roles;
+import io.api.carrent.domain.exceptions.DomainException;
+import io.api.carrent.infra.repositories.jpa.UserJpaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

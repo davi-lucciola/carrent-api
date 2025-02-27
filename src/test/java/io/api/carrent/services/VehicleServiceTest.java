@@ -1,14 +1,15 @@
 package io.api.carrent.services;
 
-import io.api.carrent.dto.input.SaveVehicleDTO;
-import io.api.carrent.dto.output.VehicleDTO;
-import io.api.carrent.entities.Vehicle;
-import io.api.carrent.entities.VehicleType;
-import io.api.carrent.entities.enums.VehicleStatus;
-import io.api.carrent.exceptions.DomainException;
-import io.api.carrent.exceptions.NotFoundException;
-import io.api.carrent.repositories.VehicleJpaRepository;
-import io.api.carrent.repositories.VehicleTypeJpaRepository;
+import io.api.carrent.domain.services.VehicleService;
+import io.api.carrent.domain.dto.input.SaveVehicleDTO;
+import io.api.carrent.domain.dto.output.VehicleDTO;
+import io.api.carrent.domain.entities.Vehicle;
+import io.api.carrent.domain.entities.VehicleType;
+import io.api.carrent.domain.enums.VehicleStatus;
+import io.api.carrent.domain.exceptions.DomainException;
+import io.api.carrent.domain.exceptions.NotFoundException;
+import io.api.carrent.infra.repositories.jpa.VehicleJpaRepository;
+import io.api.carrent.infra.repositories.jpa.VehicleTypeJpaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

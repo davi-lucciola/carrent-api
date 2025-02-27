@@ -1,12 +1,13 @@
 package io.api.carrent.services;
 
-import io.api.carrent.dto.input.SaveVehicleTypeDTO;
-import io.api.carrent.entities.Vehicle;
-import io.api.carrent.entities.VehicleType;
-import io.api.carrent.exceptions.DomainException;
-import io.api.carrent.exceptions.NotFoundException;
-import io.api.carrent.repositories.VehicleJpaRepository;
-import io.api.carrent.repositories.VehicleTypeJpaRepository;
+import io.api.carrent.domain.services.VehicleTypeService;
+import io.api.carrent.domain.dto.input.SaveVehicleTypeDTO;
+import io.api.carrent.domain.entities.Vehicle;
+import io.api.carrent.domain.entities.VehicleType;
+import io.api.carrent.domain.exceptions.DomainException;
+import io.api.carrent.domain.exceptions.NotFoundException;
+import io.api.carrent.domain.ports.repositories.IVehicleRepository;
+import io.api.carrent.domain.ports.repositories.IVehicleTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,10 +24,10 @@ import java.util.Optional;
 class VehicleTypeServiceTest {
 
     @Mock
-    private VehicleJpaRepository vehicleRepository;
+    private IVehicleRepository vehicleRepository;
 
     @Mock
-    private VehicleTypeJpaRepository vehicleTypeRepository;
+    private IVehicleTypeRepository vehicleTypeRepository;
 
     @InjectMocks
     private VehicleTypeService vehicleTypeService;
