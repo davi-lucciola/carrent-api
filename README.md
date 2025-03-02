@@ -19,6 +19,8 @@ Ou acessar o endereço abaixo:
 
 ## Funcionalidades
 
+### Backend
+
 - [x] Autenticação (Geral)
   - [x] Cadastro de Usuários
   - [x] Login (com JWT)
@@ -26,9 +28,17 @@ Ou acessar o endereço abaixo:
 - [ ] Gerenciamento de Veículos (Admin)
     - [x] CRUD de Veículos
     - [x] CRUD de Tipos de Veículos
-    - [ ] Confirmar reserva (RESERVADO -> ALUGADO)
-    - [ ] Confirmar devolução (ALUGADO -> DISPONIVEL)
+    - [ ] Listagem do Historico de Status do Veículo.
 
 - [ ] Aluguel de Veículos (Geral)
-  - [ ] Solicitar aluguel do veículo (DISPONIVEL -> RESERVADO)
-  
+  - [x] Solicitar aluguel do veículo (DISPONIVEL -> RESERVADO)
+  - [x] Cancelar da propria reserva (RESERVADO -> DISPONIVEL)
+  - [ ] Listagem das proprias reservas
+  - [ ] Ver códigos no detalhar de uma reserva somente quando ela foi realizada pelo proprio usuário
+  - [ ] Job de Cancelamento de Reservas Expiradas
+
+- [ ] Aluguel de Veículos (Admin)
+    - [x] Confirmar reserva (RESERVADO -> ALUGADO)
+    - [x] Confirmar devolução (ALUGADO -> DISPONIVEL)
+    - [x] Cancelar reserva (RESERVADO -> DISPONIVEL)
+    - [ ] Listagem das reservas
