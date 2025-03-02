@@ -1,15 +1,16 @@
 package io.api.carrent.domain.entities;
 
 import io.api.carrent.domain.dto.output.UserDTO;
+import io.api.carrent.domain.enums.Roles;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +36,8 @@ public class User implements UserDetails {
     @Column(name = "fl_active", nullable = false)
     private Boolean flActive = true;
 
-    @CreationTimestamp
     @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -70,6 +70,10 @@ public class User implements UserDetails {
         return this.email;
     }
 
+    public boolean isAdmin() {
+        return this.roles.stream().anyMatch(role -> Roles.ADMIN.getId().equals(role.getId()));
+    }
+
     public UserDTO toDTO() {
         return new UserDTO(
                 this.id,
@@ -77,7 +81,7 @@ public class User implements UserDetails {
                 this.email,
                 this.flActive,
                 this.roles.stream().map(Role::getName).toList(),
-                this.createdAt
+                this.createdAt.toInstant(ZoneOffset.ofHours(-3))
         );
     }
 }

@@ -4,8 +4,14 @@ import lombok.Getter;
 
 @Getter
 public enum RentStatus {
-    WATING,
-    CANCELED,
-    IN_PROGRESS,
-    FINISHED
+    WATING("Aguardando"),
+    CANCELED("Cancelada"),
+    IN_PROGRESS("Em Andamento"),
+    FINISHED("Finalizada");
+
+    private final String description;
+
+    RentStatus(String description) {
+        this.description = description;
+    }
 }

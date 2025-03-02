@@ -13,5 +13,4 @@ public record CreateUserDTO(
 
         @NotBlank(message = "O campo 'password é obrigatório.'")
         String password
-) {
-}
+) {}

@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum VehicleStatus {
     AVAILABLE("Disponivel"),
-    RESERVED("Reservado"),
+    BOOKED("Reservado"),
     RENTED("Alugado");
 
     private final String description;

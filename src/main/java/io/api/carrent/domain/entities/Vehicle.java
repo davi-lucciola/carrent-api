@@ -1,12 +1,16 @@
 package io.api.carrent.domain.entities;
 
 import io.api.carrent.domain.enums.VehicleStatus;
+import io.api.carrent.domain.exceptions.DomainException;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -43,9 +47,11 @@ public class Vehicle {
     @JoinColumn(name = "vehicle_type_id", referencedColumnName = "id", nullable = false)
     private VehicleType vehicleType;
 
-    @CreationTimestamp
     @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<VehicleStatusHistory> statusHistories;
 
     public Vehicle(String plate, String brand, String model, Integer year, Float odometer, VehicleType vehicleType) {
         this.plate = plate;
@@ -54,6 +60,27 @@ public class Vehicle {
         this.year = year;
         this.odometer = odometer;
         this.vehicleType = vehicleType;
+        this.statusHistories = List.of(new VehicleStatusHistory(this));
+    }
+
+    public void book() {
+        if (!this.status.equals(VehicleStatus.AVAILABLE)) {
+            throw new DomainException("Você não pode reservar veículos que não estão disponiveis.");
+        }
+
+        this.status = VehicleStatus.BOOKED;
+    }
+
+    public void rent() {
+        if (!this.status.equals(VehicleStatus.BOOKED)) {
+            throw new DomainException("Você não pode alugar veículos que não estão reservados.");
+        }
+
+        this.status = VehicleStatus.RENTED;
+    }
+
+    public void available() {
+        this.status = VehicleStatus.AVAILABLE;
     }
 
     public void update(String plate, String brand, String model, Integer year, Float odometer, VehicleType vehicleType) {
@@ -70,6 +97,10 @@ public class Vehicle {
     }
 
     public void deactivate() {
+        if (!VehicleStatus.AVAILABLE.equals(this.status)) {
+            throw new DomainException("Não é possivel desativar um veículo que não está disponivel.");
+        }
+
         this.flActive = false;
     }
 }

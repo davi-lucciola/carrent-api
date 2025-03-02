@@ -1,7 +1,7 @@
 package io.api.carrent.infra.jwt;
 
 import io.api.carrent.domain.entities.User;
-import io.api.carrent.infra.repositories.jpa.UserJpaRepository;
+import io.api.carrent.infra.repositories.commands.jpa.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

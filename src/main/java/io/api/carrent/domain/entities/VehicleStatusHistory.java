@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -18,11 +20,25 @@ public class VehicleStatusHistory {
     @JoinColumn(name = "vehicle_id", referencedColumnName = "id", nullable = false)
     private Vehicle vehicle;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "renter_user_id", referencedColumnName = "id", nullable = false)
-    private User renter;
-
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private VehicleStatus status;
+
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt = LocalDateTime.now();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rent_id", referencedColumnName = "id")
+    private VehicleRent rent;
+
+    public VehicleStatusHistory(Vehicle vehicle) {
+        this.vehicle = vehicle;
+        this.status = vehicle.getStatus();
+    }
+
+    public VehicleStatusHistory(Vehicle vehicle, VehicleRent rent) {
+        this.vehicle = vehicle;
+        this.rent = rent;
+        this.status = vehicle.getStatus();
+    }
 }

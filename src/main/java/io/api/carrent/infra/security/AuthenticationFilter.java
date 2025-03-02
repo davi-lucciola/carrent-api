@@ -1,11 +1,17 @@
 package io.api.carrent.infra.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.api.carrent.domain.dto.output.MessageDTO;
+import io.api.carrent.domain.exceptions.AuthException;
 import io.api.carrent.infra.jwt.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,25 +34,39 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        String authHeader = request.getHeader("Authorization");
-        String token = getToken(authHeader);
+        try {
+            String authHeader = request.getHeader("Authorization");
+            String token = getToken(authHeader);
 
-        if (token == null) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+            if (token == null) {
+                filterChain.doFilter(request, response);
+                return;
+            }
 
-        String email = jwtService.extractEmail(token);
-        boolean notAuthenticated = SecurityContextHolder.getContext().getAuthentication() == null;
+            String email = jwtService.extractEmail(token);
+            boolean notAuthenticated = SecurityContextHolder.getContext().getAuthentication() == null;
 
-        if (email != null && notAuthenticated) {
-            UserDetails user = userDetailsService.loadUserByUsername(email);
+            if (email != null && notAuthenticated) {
+                UserDetails user = userDetailsService.loadUserByUsername(email);
 
-            if (jwtService.isValid(token, user)) {
-                updateContext(user, request);
+                if (jwtService.isValid(token, user)) {
+                    updateContext(user, request);
+                }
             }
 
             filterChain.doFilter(request, response);
+        } catch (ExpiredJwtException e) {
+            var body = new MessageDTO("Token expirado.");
+            handleException(response, body, HttpStatus.UNAUTHORIZED);
+        } catch (JwtException e) {
+            var body = new MessageDTO("Token inválido.");
+            handleException(response, body, HttpStatus.UNAUTHORIZED);
+        } catch (AuthException e) {
+            var body = new MessageDTO(e.getMessage());
+            handleException(response, body, HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            var body = new MessageDTO("Não foi possivel processar sua solicitação.");
+            handleException(response, body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -64,5 +84,14 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
 
         return authHeader.replace(bearerPrefix, "");
+    }
+
+    private <T> void handleException(HttpServletResponse response, T body, HttpStatus status) throws IOException {
+        response.setStatus(status.value());
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(body));
     }
 }
