@@ -3,6 +3,7 @@ package io.api.carrent.infra.repositories.commands;
 import io.api.carrent.core.ports.repositories.command.IVehicleRentRepository;
 import io.api.carrent.domain.entities.VehicleRent;
 import io.api.carrent.domain.entities.VehicleStatusHistory;
+import io.api.carrent.domain.enums.RentStatus;
 import io.api.carrent.infra.repositories.commands.jpa.VehicleJpaRepository;
 import io.api.carrent.infra.repositories.commands.jpa.VehicleRentJpaRepository;
 import io.api.carrent.infra.repositories.commands.jpa.VehicleStatusHistoryJpaRepository;
@@ -10,6 +11,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -33,5 +36,10 @@ public class VehicleRentRepository implements IVehicleRentRepository {
     @Override
     public Optional<VehicleRent> findById(Long vehicleId) {
         return vehicleRentJpaRepository.findById(vehicleId);
+    }
+
+    @Override
+    public List<VehicleRent> findAllExpired() {
+        return vehicleRentJpaRepository.findAllExpired(LocalDateTime.now(), RentStatus.WATING);
     }
 }

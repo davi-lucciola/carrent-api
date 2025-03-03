@@ -34,4 +34,43 @@ public class VehicleRentSQL {
                 vr.created_at DESC
             :offset
             """;
+
+    public static final String VEHICLE_RENT_DETAIL_QUERY = """
+            SELECT
+            	vr.id,
+            	v.plate,
+            	v.brand,
+            	v.model,
+            	vt.name vehicleType,
+            	vr.rent_status status,
+            	renter.name renter,
+            	(CASE WHEN vr.renter_user_id = :userId
+            		THEN vr.withdraw_code
+            		ELSE '*****'
+            	END) withdrawCode,
+            	(CASE WHEN vr.renter_user_id = :userId
+            		THEN vr.return_code
+            		ELSE '*****'
+            	END) returnCode,
+            	vr.withdraw_datetime withdrawDatetime,
+            	vr.return_datetime returnDatetime,
+            	w_operator.name operator,
+            	r_operator.name returnOperator,
+            	vr.withdraw_max_datetime expirationWithdrawDate,
+            	vr.created_at createdAt,
+            	vr.cancellation_reason cancellationReason
+            FROM
+            	vehicle_rents vr
+            	INNER JOIN vehicles v
+            		ON vr.vehicle_id = v.id
+            	INNER JOIN vehicle_types vt
+            		ON v.vehicle_type_id = vt.id
+            	INNER JOIN users renter
+            		ON vr.renter_user_id = renter.id
+            	LEFT JOIN users w_operator
+            		ON vr.operator_user_id = w_operator.id
+            	LEFT JOIN users r_operator
+            		ON vr.return_operator_user_id = r_operator.id
+            :where
+            """;
 }

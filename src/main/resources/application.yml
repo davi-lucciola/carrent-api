@@ -4,7 +4,7 @@ spring:
 
   # Database
   datasource:
-    url: jdbc:sqlserver://localhost;databaseName=carrent_db;encrypt=false;trustServerCertificate=false
+    url: jdbc:sqlserver://db;databaseName=carrent_db;encrypt=false;trustServerCertificate=false
     username: sa
     password: YourStrong!Passw0rd
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver

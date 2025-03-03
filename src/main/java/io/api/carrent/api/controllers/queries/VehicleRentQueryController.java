@@ -4,6 +4,7 @@ import io.api.carrent.domain.dto.input.VehicleRentQueryBasicDTO;
 import io.api.carrent.domain.dto.input.VehicleRentQueryDTO;
 import io.api.carrent.domain.dto.output.Pagination;
 import io.api.carrent.domain.dto.output.VehicleRentDTO;
+import io.api.carrent.domain.dto.output.VehicleRentDetailDTO;
 import io.api.carrent.domain.entities.User;
 import io.api.carrent.domain.services.queries.IVehicleRentQueryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,8 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static io.api.carrent.api.docs.SwaggerConstants.RENT_VEHICLE_TAG;
 import static io.api.carrent.api.docs.SwaggerConstants.SECURITY_BEARER;
@@ -37,6 +36,14 @@ public class VehicleRentQueryController {
     public ResponseEntity<Pagination<VehicleRentDTO>> findAllRents(@ParameterObject VehicleRentQueryBasicDTO query) {
         var filter = new VehicleRentQueryDTO(query, null);
         return new ResponseEntity<>(vehicleRentQueryService.findAll(filter), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    @SecurityRequirement(name = SECURITY_BEARER)
+    @Operation(description = "Endpoint para detalhar um aluguel pelo id.")
+    public ResponseEntity<VehicleRentDetailDTO> findRentById(@PathVariable("id") Long rentId) {
+        var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity<>(vehicleRentQueryService.findById(rentId, user), HttpStatus.OK);
     }
 
     @GetMapping("/my")

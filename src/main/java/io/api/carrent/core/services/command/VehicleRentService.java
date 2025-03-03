@@ -58,7 +58,12 @@ public class VehicleRentService implements IVehicleRentService {
             }
         }
 
-        vehicleRentWaiting.cancelRent(cancelVehicleRentDTO.cancellationReason(), operatorUser);
+        cancelRent(vehicleRentWaiting, operatorUser, cancelVehicleRentDTO.cancellationReason());
+    }
+
+    @Override
+    public void cancelRent(VehicleRent vehicleRentWaiting, User operatorUser, String cancellationReason) {
+        vehicleRentWaiting.cancelRent(cancellationReason, operatorUser);
         vehicleRentRepository.save(vehicleRentWaiting);
     }
 

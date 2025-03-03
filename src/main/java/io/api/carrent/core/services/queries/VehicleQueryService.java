@@ -15,11 +15,23 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class VehicleQueryService implements IVehicleQueryService {
     private final IVehicleQueryRepository vehicleQueryRepository;
+
+    @Override
+    public VehicleDTO findById(Long vehicleId) {
+        Optional<VehicleDTO> vehicle = vehicleQueryRepository.findById(vehicleId);
+
+        if (vehicle.isEmpty()) {
+            throw new NotFoundException("Veículo não encontrado.");
+        }
+
+        return vehicle.get();
+    }
 
     @Override
     public Pagination<VehicleDTO> findAll(VehicleQueryDTO filter) {
@@ -41,14 +53,5 @@ public class VehicleQueryService implements IVehicleQueryService {
         }
 
         return new Pagination<>(vehicleStatus, vehicleStatus.get(0).getTotal(), filter.getPage(), filter.getPerPage());
-    }
-
-    @Override
-    public VehicleDTO findById(Long vehicleId) {
-        try {
-            return vehicleQueryRepository.findById(vehicleId);
-        } catch (NoResultException | EmptyResultDataAccessException e) {
-            throw new NotFoundException("Veículo não encontrado.");
-        }
     }
 }

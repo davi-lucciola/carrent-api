@@ -5,15 +5,19 @@ import io.api.carrent.domain.dto.input.VehicleQueryDTO;
 import io.api.carrent.domain.dto.input.VehicleStatusQueryDTO;
 import io.api.carrent.domain.dto.output.VehicleDTO;
 import io.api.carrent.domain.dto.output.VehicleStatusDTO;
+import io.api.carrent.domain.exceptions.NotFoundException;
 import io.api.carrent.infra.repositories.queries.mapper.AliasToDtoMapper;
 import io.api.carrent.infra.repositories.queries.sql.VehicleSQL;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static io.api.carrent.infra.repositories.queries.sql.SqlConstants.*;
 
@@ -79,17 +83,23 @@ public class VehicleQueryRepository implements IVehicleQueryRepository {
 
     @Override
     @SuppressWarnings({"unchecked"})
-    public VehicleDTO findById(Long vehicleId) {
-        String sql = VehicleSQL.VEHICLE_QUERY
-                .replace(OFFSET_VAR, "")
-                .replace(WHERE_VAR, " AND v.id = :vehicleId ");
+    public Optional<VehicleDTO> findById(Long vehicleId) {
+        try {
+            String sql = VehicleSQL.VEHICLE_QUERY
+                    .replace(OFFSET_VAR, "")
+                    .replace(WHERE_VAR, " AND v.id = :vehicleId ");
 
-        return (VehicleDTO) entityManager
-                .createNativeQuery(sql)
-                .setParameter("vehicleId", vehicleId)
-                .unwrap(org.hibernate.query.NativeQuery.class)
-                .setTupleTransformer(new AliasToDtoMapper<>(VehicleDTO.class))
-                .getSingleResult();
+            VehicleDTO result = (VehicleDTO) entityManager
+                    .createNativeQuery(sql)
+                    .setParameter("vehicleId", vehicleId)
+                    .unwrap(org.hibernate.query.NativeQuery.class)
+                    .setTupleTransformer(new AliasToDtoMapper<>(VehicleDTO.class))
+                    .getSingleResult();
+
+            return Optional.of(result);
+        } catch (NoResultException | EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override

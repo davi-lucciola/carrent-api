@@ -6,9 +6,10 @@ import io.api.carrent.domain.dto.output.VehicleDTO;
 import io.api.carrent.domain.dto.output.VehicleStatusDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IVehicleQueryRepository {
-    VehicleDTO findById(Long vehicleId);
+    Optional<VehicleDTO> findById(Long vehicleId);
     List<VehicleDTO> findAll(VehicleQueryDTO filter);
     List<VehicleStatusDTO> findAllStatusHistory(VehicleStatusQueryDTO filter);
 }

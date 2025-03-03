@@ -30,12 +30,12 @@ Ou acessar o endereço abaixo:
     - [x] CRUD de Tipos de Veículos
     - [x] Listagem do Historico de Status do Veículo.
 
-- [ ] Aluguel de Veículos (Geral)
+- [x] Aluguel de Veículos (Geral)
   - [x] Solicitar aluguel do veículo (DISPONIVEL -> RESERVADO)
   - [x] Cancelar da propria reserva (RESERVADO -> DISPONIVEL)
   - [x] Listagem das proprias reservas
-  - [ ] Ver códigos no detalhar de uma reserva somente quando ela foi realizada pelo proprio usuário
-  - [ ] Job de Cancelamento de Reservas Expiradas
+  - [x] Ver códigos no detalhar de uma reserva somente quando ela foi realizada pelo proprio usuário
+  - [x] Job de Cancelamento de Reservas Expiradas
 
 - [x] Aluguel de Veículos (Admin)
     - [x] Confirmar reserva (RESERVADO -> ALUGADO)

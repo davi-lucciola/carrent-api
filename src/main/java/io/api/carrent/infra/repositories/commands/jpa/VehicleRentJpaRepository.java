@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface VehicleRentJpaRepository extends JpaRepository<VehicleRent, Long> {
-    @Query("SELECT vr FROM VehicleRent vr INNER JOIN vr.vehicle WHERE vr.vehicle.id = ?1 AND vr.status = ?2")
-    Optional<VehicleRent> findByVehicleAndStatus(Long vehicleId, RentStatus status);
+    @Query("SELECT vr FROM VehicleRent vr INNER JOIN vr.vehicle WHERE vr.withdrawMaxDatetime < ?1 AND vr.status = ?2")
+    List<VehicleRent> findAllExpired(LocalDateTime now, RentStatus status);
 }
