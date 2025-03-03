@@ -1,4 +1,4 @@
-package io.api.carrent.core.ports.jwt;
+package io.api.carrent.app.ports.jwt;
 
 import org.springframework.security.core.userdetails.UserDetails;
 

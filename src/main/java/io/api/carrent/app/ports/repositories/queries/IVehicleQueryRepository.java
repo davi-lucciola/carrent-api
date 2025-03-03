@@ -1,4 +1,4 @@
-package io.api.carrent.core.ports.repositories.queries;
+package io.api.carrent.app.ports.repositories.queries;
 
 import io.api.carrent.domain.dto.input.VehicleQueryDTO;
 import io.api.carrent.domain.dto.input.VehicleStatusQueryDTO;

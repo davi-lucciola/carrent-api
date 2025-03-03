@@ -1,6 +1,6 @@
 package io.api.carrent.infra.repositories.commands;
 
-import io.api.carrent.core.ports.repositories.command.IVehicleRepository;
+import io.api.carrent.app.ports.repositories.command.IVehicleRepository;
 import io.api.carrent.domain.entities.Vehicle;
 import io.api.carrent.infra.repositories.commands.jpa.VehicleJpaRepository;
 import jakarta.transaction.Transactional;

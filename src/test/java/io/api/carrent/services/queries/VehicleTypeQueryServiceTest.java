@@ -1,7 +1,7 @@
 package io.api.carrent.services.queries;
 
-import io.api.carrent.core.ports.repositories.queries.IVehicleTypeQueryRepository;
-import io.api.carrent.core.services.queries.VehicleTypeQueryService;
+import io.api.carrent.app.ports.repositories.queries.IVehicleTypeQueryRepository;
+import io.api.carrent.app.services.queries.VehicleTypeQueryService;
 import io.api.carrent.domain.dto.output.VehicleTypeDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

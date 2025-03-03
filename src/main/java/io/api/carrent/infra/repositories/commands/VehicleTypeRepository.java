@@ -1,6 +1,6 @@
 package io.api.carrent.infra.repositories.commands;
 
-import io.api.carrent.core.ports.repositories.command.IVehicleTypeRepository;
+import io.api.carrent.app.ports.repositories.command.IVehicleTypeRepository;
 import io.api.carrent.domain.entities.VehicleType;
 import io.api.carrent.infra.repositories.commands.jpa.VehicleTypeJpaRepository;
 import lombok.RequiredArgsConstructor;

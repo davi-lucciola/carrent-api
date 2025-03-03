@@ -1,6 +1,6 @@
-package io.api.carrent.core.services.queries;
+package io.api.carrent.app.services.queries;
 
-import io.api.carrent.core.ports.repositories.queries.IVehicleQueryRepository;
+import io.api.carrent.app.ports.repositories.queries.IVehicleQueryRepository;
 import io.api.carrent.domain.dto.input.VehicleQueryDTO;
 import io.api.carrent.domain.dto.input.VehicleStatusQueryDTO;
 import io.api.carrent.domain.dto.output.Pagination;
@@ -9,9 +9,7 @@ import io.api.carrent.domain.dto.output.VehicleStatusDTO;
 import io.api.carrent.domain.exceptions.NoContentException;
 import io.api.carrent.domain.exceptions.NotFoundException;
 import io.api.carrent.domain.services.queries.IVehicleQueryService;
-import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

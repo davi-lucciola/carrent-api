@@ -1,7 +1,7 @@
 package io.api.carrent.services.commands;
 
-import io.api.carrent.core.ports.repositories.command.IUserRepository;
-import io.api.carrent.core.services.command.UserService;
+import io.api.carrent.app.ports.repositories.command.IUserRepository;
+import io.api.carrent.app.services.command.UserService;
 import io.api.carrent.domain.dto.input.CreateUserDTO;
 import io.api.carrent.domain.dto.output.UserDTO;
 import io.api.carrent.domain.entities.Role;
@@ -17,7 +17,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,7 +41,7 @@ class UserServiceTest {
         Role role = new Role();
         role.setId(Roles.ADMIN.getId());
         Set<Role> roles = Set.of(role);
-        Instant createdAt = Instant.now();
+        LocalDateTime createdAt = LocalDateTime.now();
 
         User user = new User(createUserDTO.name(), createUserDTO.email(), "encodedPassword");
         user.setId(1L);

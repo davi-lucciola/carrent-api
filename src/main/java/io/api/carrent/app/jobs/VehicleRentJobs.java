@@ -1,6 +1,6 @@
-package io.api.carrent.infra.jobs;
+package io.api.carrent.app.jobs;
 
-import io.api.carrent.core.ports.repositories.command.IVehicleRentRepository;
+import io.api.carrent.app.ports.repositories.command.IVehicleRentRepository;
 import io.api.carrent.domain.entities.VehicleRent;
 import io.api.carrent.domain.services.command.IVehicleRentService;
 import lombok.RequiredArgsConstructor;

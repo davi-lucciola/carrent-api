@@ -1,6 +1,6 @@
-package io.api.carrent.core.services.command;
+package io.api.carrent.app.services.command;
 
-import io.api.carrent.core.ports.repositories.command.IUserRepository;
+import io.api.carrent.app.ports.repositories.command.IUserRepository;
 import io.api.carrent.domain.dto.input.CreateUserDTO;
 import io.api.carrent.domain.dto.output.UserDTO;
 import io.api.carrent.domain.entities.User;

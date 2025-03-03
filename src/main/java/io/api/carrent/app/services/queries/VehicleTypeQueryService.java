@@ -1,6 +1,6 @@
-package io.api.carrent.core.services.queries;
+package io.api.carrent.app.services.queries;
 
-import io.api.carrent.core.ports.repositories.queries.IVehicleTypeQueryRepository;
+import io.api.carrent.app.ports.repositories.queries.IVehicleTypeQueryRepository;
 import io.api.carrent.domain.dto.output.VehicleTypeDTO;
 import io.api.carrent.domain.services.queries.IVehicleTypeQueryService;
 import lombok.RequiredArgsConstructor;

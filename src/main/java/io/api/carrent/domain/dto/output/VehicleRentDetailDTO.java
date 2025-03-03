@@ -3,7 +3,6 @@ package io.api.carrent.domain.dto.output;
 import io.api.carrent.domain.enums.RentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;

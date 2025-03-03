@@ -1,6 +1,6 @@
-package io.api.carrent.core.services.command;
+package io.api.carrent.app.services.command;
 
-import io.api.carrent.core.ports.jwt.IJwtService;
+import io.api.carrent.app.ports.jwt.IJwtService;
 import io.api.carrent.domain.dto.input.LoginDTO;
 import io.api.carrent.domain.dto.output.AuthDTO;
 import io.api.carrent.domain.services.command.IAuthService;

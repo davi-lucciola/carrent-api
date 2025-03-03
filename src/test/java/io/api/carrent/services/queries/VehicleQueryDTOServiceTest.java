@@ -1,7 +1,7 @@
 package io.api.carrent.services.queries;
 
-import io.api.carrent.core.ports.repositories.queries.IVehicleQueryRepository;
-import io.api.carrent.core.services.queries.VehicleQueryService;
+import io.api.carrent.app.ports.repositories.queries.IVehicleQueryRepository;
+import io.api.carrent.app.services.queries.VehicleQueryService;
 import io.api.carrent.domain.dto.output.VehicleDTO;
 import io.api.carrent.domain.dto.output.VehicleTypeDTO;
 import io.api.carrent.domain.enums.VehicleStatus;

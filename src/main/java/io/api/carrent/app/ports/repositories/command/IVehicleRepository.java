@@ -1,4 +1,4 @@
-package io.api.carrent.core.ports.repositories.command;
+package io.api.carrent.app.ports.repositories.command;
 
 import io.api.carrent.domain.entities.Vehicle;
 

@@ -1,6 +1,6 @@
 package io.api.carrent.services.commands;
 
-import io.api.carrent.core.services.command.AuthService;
+import io.api.carrent.app.services.command.AuthService;
 import io.api.carrent.domain.dto.input.LoginDTO;
 import io.api.carrent.domain.dto.output.AuthDTO;
 import io.api.carrent.domain.entities.User;

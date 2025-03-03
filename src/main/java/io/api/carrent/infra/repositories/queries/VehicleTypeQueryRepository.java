@@ -1,6 +1,6 @@
 package io.api.carrent.infra.repositories.queries;
 
-import io.api.carrent.core.ports.repositories.queries.IVehicleTypeQueryRepository;
+import io.api.carrent.app.ports.repositories.queries.IVehicleTypeQueryRepository;
 import io.api.carrent.domain.dto.output.VehicleTypeDTO;
 import io.api.carrent.infra.repositories.queries.mapper.AliasToDtoMapper;
 import io.api.carrent.infra.repositories.queries.sql.VehicleTypeSQL;

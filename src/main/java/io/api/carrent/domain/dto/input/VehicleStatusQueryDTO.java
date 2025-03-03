@@ -1,6 +1,5 @@
 package io.api.carrent.domain.dto.input;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,7 +1,7 @@
-package io.api.carrent.core.services.command;
+package io.api.carrent.app.services.command;
 
-import io.api.carrent.core.ports.repositories.command.IVehicleRentRepository;
-import io.api.carrent.core.ports.repositories.command.IVehicleRepository;
+import io.api.carrent.app.ports.repositories.command.IVehicleRentRepository;
+import io.api.carrent.app.ports.repositories.command.IVehicleRepository;
 import io.api.carrent.domain.dto.input.BookVehicleRentDTO;
 import io.api.carrent.domain.dto.input.CancelVehicleRentDTO;
 import io.api.carrent.domain.dto.input.ConfirmVehicleRentDTO;

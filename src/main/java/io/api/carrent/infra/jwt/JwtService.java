@@ -1,6 +1,6 @@
 package io.api.carrent.infra.jwt;
 
-import io.api.carrent.core.ports.jwt.IJwtService;
+import io.api.carrent.app.ports.jwt.IJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

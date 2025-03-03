@@ -1,11 +1,10 @@
 package io.api.carrent.infra.repositories.queries;
 
-import io.api.carrent.core.ports.repositories.queries.IVehicleRentQueryRepository;
+import io.api.carrent.app.ports.repositories.queries.IVehicleRentQueryRepository;
 import io.api.carrent.domain.dto.input.VehicleRentQueryDTO;
 import io.api.carrent.domain.dto.output.VehicleRentDTO;
 import io.api.carrent.domain.dto.output.VehicleRentDetailDTO;
 import io.api.carrent.domain.entities.User;
-import io.api.carrent.domain.exceptions.NotFoundException;
 import io.api.carrent.infra.repositories.queries.mapper.AliasToDtoMapper;
 import io.api.carrent.infra.repositories.queries.sql.VehicleRentSQL;
 import jakarta.persistence.EntityManager;

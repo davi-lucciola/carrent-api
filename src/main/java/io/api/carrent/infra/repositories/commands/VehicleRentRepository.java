@@ -1,6 +1,6 @@
 package io.api.carrent.infra.repositories.commands;
 
-import io.api.carrent.core.ports.repositories.command.IVehicleRentRepository;
+import io.api.carrent.app.ports.repositories.command.IVehicleRentRepository;
 import io.api.carrent.domain.entities.VehicleRent;
 import io.api.carrent.domain.entities.VehicleStatusHistory;
 import io.api.carrent.domain.enums.RentStatus;

@@ -1,6 +1,6 @@
-package io.api.carrent.core.services.queries;
+package io.api.carrent.app.services.queries;
 
-import io.api.carrent.core.ports.repositories.queries.IVehicleRentQueryRepository;
+import io.api.carrent.app.ports.repositories.queries.IVehicleRentQueryRepository;
 import io.api.carrent.domain.dto.input.VehicleRentQueryDTO;
 import io.api.carrent.domain.dto.output.Pagination;
 import io.api.carrent.domain.dto.output.VehicleRentDTO;
