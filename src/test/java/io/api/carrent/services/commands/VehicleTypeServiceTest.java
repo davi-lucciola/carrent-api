@@ -1,13 +1,13 @@
 package io.api.carrent.services.commands;
 
+import io.api.carrent.core.ports.repositories.command.IVehicleRepository;
+import io.api.carrent.core.ports.repositories.command.IVehicleTypeRepository;
 import io.api.carrent.core.services.command.VehicleTypeService;
 import io.api.carrent.domain.dto.input.SaveVehicleTypeDTO;
 import io.api.carrent.domain.entities.Vehicle;
 import io.api.carrent.domain.entities.VehicleType;
 import io.api.carrent.domain.exceptions.DomainException;
 import io.api.carrent.domain.exceptions.NotFoundException;
-import io.api.carrent.core.ports.repositories.command.IVehicleRepository;
-import io.api.carrent.core.ports.repositories.command.IVehicleTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

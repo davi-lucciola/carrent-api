@@ -1,8 +1,8 @@
 package io.api.carrent.core.services.queries;
 
 import io.api.carrent.core.ports.repositories.queries.IVehicleTypeQueryRepository;
-import io.api.carrent.domain.services.queries.IVehicleTypeQueryService;
 import io.api.carrent.domain.dto.output.VehicleTypeDTO;
+import io.api.carrent.domain.services.queries.IVehicleTypeQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

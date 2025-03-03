@@ -14,12 +14,12 @@ public class UserRepository implements IUserRepository {
     private final UserJpaRepository userJpaRepository;
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userJpaRepository.findByEmail(email);
+    public User save(User user) {
+        return userJpaRepository.save(user);
     }
 
     @Override
-    public User save(User user) {
-        return userJpaRepository.save(user);
+    public Optional<User> findByEmail(String email) {
+        return userJpaRepository.findByEmail(email);
     }
 }

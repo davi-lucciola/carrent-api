@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Arrays;
 
 @RequiredArgsConstructor
 public class AliasToDtoMapper<T> implements TupleTransformer<T> {
@@ -30,11 +31,17 @@ public class AliasToDtoMapper<T> implements TupleTransformer<T> {
                 if (alias != null) {
                     var field = getField(dtoClass, alias);
 
-                    if (!field.getType().isAssignableFrom(value.getClass())) {
+                    if (value != null && !field.getType().isAssignableFrom(value.getClass())) {
                         value = equivalentTypeMapping(value, field.getType());
                     }
 
-                    var fieldSetter = getSetterMethod(dtoClass, alias, value.getClass());
+                    var fieldSetter = getSetterMethod(dtoClass, alias);
+                    var parameterType = fieldSetter.getParameterTypes()[0];
+
+                    if (value == null && parameterType.isPrimitive()) {
+                        continue;
+                    }
+
                     fieldSetter.invoke(dtoInstance, value);
                 }
             }
@@ -57,12 +64,19 @@ public class AliasToDtoMapper<T> implements TupleTransformer<T> {
         }
     }
 
-    private Method getSetterMethod(Class<T> dtoClass, String alias, Class<?> parameterType) {
+    private Method getSetterMethod(Class<T> dtoClass, String alias) {
         try {
             var setMethodName = "set" + alias.substring(0, 1).toUpperCase() + alias.substring(1);
-            var setterMethod = dtoClass.getMethod(setMethodName, parameterType);
-            setterMethod.setAccessible(true);
-            return setterMethod;
+            var methods = dtoClass.getMethods();
+
+            var setterMethod = Arrays.stream(methods)
+                    .filter(method -> method.getName().equals(setMethodName)).findAny();
+
+            if (setterMethod.isEmpty()) {
+                throw new NoSuchMethodException();
+            }
+
+            return setterMethod.get();
         } catch (NoSuchMethodException e) {
             throw new MappingException("Não foi encontrado metódo setter da propriedade '%s'.".formatted(alias));
         }

@@ -5,6 +5,7 @@ import io.api.carrent.domain.enums.Roles;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@ToString
 @NoArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {

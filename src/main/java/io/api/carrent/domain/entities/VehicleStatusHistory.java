@@ -1,14 +1,17 @@
 package io.api.carrent.domain.entities;
 
+import io.api.carrent.domain.enums.RentStatus;
 import io.api.carrent.domain.enums.VehicleStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@ToString
 @NoArgsConstructor
 @Table(name = "vehicle_status_historical")
 public class VehicleStatusHistory {
@@ -24,6 +27,10 @@ public class VehicleStatusHistory {
     @Enumerated(EnumType.STRING)
     private VehicleStatus status;
 
+    @Column(name = "rent_status")
+    @Enumerated(EnumType.STRING)
+    private RentStatus rentStatus;
+
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
 
@@ -37,8 +44,9 @@ public class VehicleStatusHistory {
     }
 
     public VehicleStatusHistory(Vehicle vehicle, VehicleRent rent) {
-        this.vehicle = vehicle;
         this.rent = rent;
+        this.vehicle = vehicle;
         this.status = vehicle.getStatus();
+        this.rentStatus = rent.getStatus();
     }
 }

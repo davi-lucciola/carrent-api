@@ -5,12 +5,14 @@ import io.api.carrent.domain.exceptions.DomainException;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @Entity
+@ToString
 @NoArgsConstructor
 @Table(name = "vehicle_rents")
 public class VehicleRent {

@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import static io.api.carrent.infra.security.SecurityConstants.ROLE_ADMIN;
 import static io.api.carrent.api.docs.SwaggerConstants.SECURITY_BEARER;
 import static io.api.carrent.api.docs.SwaggerConstants.VEHICLE_TAG;
+import static io.api.carrent.infra.security.SecurityConstants.ROLE_ADMIN;
 
 @Tag(name = VEHICLE_TAG)
 @RestController

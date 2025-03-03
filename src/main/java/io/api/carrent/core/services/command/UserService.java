@@ -1,10 +1,10 @@
 package io.api.carrent.core.services.command;
 
+import io.api.carrent.core.ports.repositories.command.IUserRepository;
 import io.api.carrent.domain.dto.input.CreateUserDTO;
 import io.api.carrent.domain.dto.output.UserDTO;
 import io.api.carrent.domain.entities.User;
 import io.api.carrent.domain.exceptions.DomainException;
-import io.api.carrent.core.ports.repositories.command.IUserRepository;
 import io.api.carrent.domain.services.command.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

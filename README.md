@@ -25,20 +25,20 @@ Ou acessar o endereço abaixo:
   - [x] Cadastro de Usuários
   - [x] Login (com JWT)
 
-- [ ] Gerenciamento de Veículos (Admin)
+- [x] Gerenciamento de Veículos (Admin)
     - [x] CRUD de Veículos
     - [x] CRUD de Tipos de Veículos
-    - [ ] Listagem do Historico de Status do Veículo.
+    - [x] Listagem do Historico de Status do Veículo.
 
 - [ ] Aluguel de Veículos (Geral)
   - [x] Solicitar aluguel do veículo (DISPONIVEL -> RESERVADO)
   - [x] Cancelar da propria reserva (RESERVADO -> DISPONIVEL)
-  - [ ] Listagem das proprias reservas
+  - [x] Listagem das proprias reservas
   - [ ] Ver códigos no detalhar de uma reserva somente quando ela foi realizada pelo proprio usuário
   - [ ] Job de Cancelamento de Reservas Expiradas
 
-- [ ] Aluguel de Veículos (Admin)
+- [x] Aluguel de Veículos (Admin)
     - [x] Confirmar reserva (RESERVADO -> ALUGADO)
     - [x] Confirmar devolução (ALUGADO -> DISPONIVEL)
     - [x] Cancelar reserva (RESERVADO -> DISPONIVEL)
-    - [ ] Listagem das reservas
+    - [x] Listagem das reservas

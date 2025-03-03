@@ -2,7 +2,9 @@ package io.api.carrent.infra.repositories.queries;
 
 import io.api.carrent.core.ports.repositories.queries.IVehicleQueryRepository;
 import io.api.carrent.domain.dto.input.VehicleQueryDTO;
+import io.api.carrent.domain.dto.input.VehicleStatusQueryDTO;
 import io.api.carrent.domain.dto.output.VehicleDTO;
+import io.api.carrent.domain.dto.output.VehicleStatusDTO;
 import io.api.carrent.infra.repositories.queries.mapper.AliasToDtoMapper;
 import io.api.carrent.infra.repositories.queries.sql.VehicleSQL;
 import jakarta.persistence.EntityManager;
@@ -13,52 +15,61 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static io.api.carrent.infra.repositories.queries.sql.SqlConstants.*;
+
 @Repository
 @RequiredArgsConstructor
 public class VehicleQueryRepository implements IVehicleQueryRepository {
     @PersistenceContext
     private final EntityManager entityManager;
 
+    @Override
     @SuppressWarnings({"unchecked"})
     public List<VehicleDTO> findAll(VehicleQueryDTO filter) {
-        StringBuilder sql = new StringBuilder(VehicleSQL.VEHICLE_QUERY);
+        String sql = VehicleSQL.VEHICLE_QUERY;
+        StringBuilder where = new StringBuilder(" WHERE 1 = 1 ");
 
-        if (filter.status() != null) {
-            sql.append(" AND v.status = :status ");
+        if (filter.getStatus() != null) {
+            where.append(" AND v.status = :status ");
         }
 
-        if (filter.flActive() != null) {
-            sql.append(" AND v.fl_active = :flActive ");
+        if (filter.getFlActive() != null) {
+            where.append(" AND v.fl_active = :flActive ");
         }
 
-        if (filter.vehicleTypeId() != null) {
-            sql.append(" AND v.vehicle_type_id = :vehicleTypeId ");
+        if (filter.getVehicleTypeId() != null) {
+            where.append(" AND v.vehicle_type_id = :vehicleTypeId ");
         }
 
-        if (filter.search() != null) {
-            sql.append(" AND ( ");
-            sql.append(" v.plate LIKE '%' + :search + '%' ");
-            sql.append(" OR v.brand LIKE '%' + :search + '%' ");
-            sql.append(" OR v.model LIKE '%' + :search + '%' ");
-            sql.append(" ) ");
+        if (filter.getSearch() != null) {
+            where.append(" AND ( ");
+            where.append(" v.plate LIKE '%' + :search + '%' ");
+            where.append(" OR v.brand LIKE '%' + :search + '%' ");
+            where.append(" OR v.model LIKE '%' + :search + '%' ");
+            where.append(" ) ");
         }
 
-        Query query = entityManager.createNativeQuery(sql.toString());
+        sql = sql.replace(WHERE_VAR, where.toString()).replace(OFFSET_VAR, OFFSET_SQL);
 
-        if (filter.status() != null) {
-            query.setParameter("status", filter.status().name());
+        Query query = entityManager
+                .createNativeQuery(sql)
+                .setParameter("page", filter.getPage())
+                .setParameter("perPage", filter.getPerPage());
+
+        if (filter.getStatus() != null) {
+            query.setParameter("status", filter.getStatus().name());
         }
 
-        if (filter.flActive() != null) {
-            query.setParameter("flActive", filter.flActive());
+        if (filter.getFlActive() != null) {
+            query.setParameter("flActive", filter.getFlActive());
         }
 
-        if (filter.vehicleTypeId() != null) {
-            query.setParameter("vehicleTypeId", filter.vehicleTypeId());
+        if (filter.getVehicleTypeId() != null) {
+            query.setParameter("vehicleTypeId", filter.getVehicleTypeId());
         }
 
-        if (filter.search() != null) {
-            query.setParameter("search", filter.search());
+        if (filter.getSearch() != null) {
+            query.setParameter("search", filter.getSearch());
         }
 
         return query.unwrap(org.hibernate.query.NativeQuery.class)
@@ -66,15 +77,33 @@ public class VehicleQueryRepository implements IVehicleQueryRepository {
                 .getResultList();
     }
 
+    @Override
     @SuppressWarnings({"unchecked"})
     public VehicleDTO findById(Long vehicleId) {
-        String sql = VehicleSQL.VEHICLE_QUERY + " AND v.id = :rentId ";
+        String sql = VehicleSQL.VEHICLE_QUERY
+                .replace(OFFSET_VAR, "")
+                .replace(WHERE_VAR, " AND v.id = :vehicleId ");
 
         return (VehicleDTO) entityManager
                 .createNativeQuery(sql)
-                .setParameter("rentId", vehicleId)
+                .setParameter("vehicleId", vehicleId)
                 .unwrap(org.hibernate.query.NativeQuery.class)
                 .setTupleTransformer(new AliasToDtoMapper<>(VehicleDTO.class))
                 .getSingleResult();
+    }
+
+    @Override
+    @SuppressWarnings({"unchecked"})
+    public List<VehicleStatusDTO> findAllStatusHistory(VehicleStatusQueryDTO filter) {
+        String sql = VehicleSQL.VEHICLE_STATUS_HISTORY_QUERY.replace(OFFSET_VAR, OFFSET_SQL);
+
+        return entityManager
+                .createNativeQuery(sql)
+                .setParameter("vehicleId", filter.getVehicleId())
+                .setParameter("page", filter.getPage())
+                .setParameter("perPage", filter.getPerPage())
+                .unwrap(org.hibernate.query.NativeQuery.class)
+                .setTupleTransformer(new AliasToDtoMapper<>(VehicleStatusDTO.class))
+                .getResultList();
     }
 }

@@ -1,11 +1,14 @@
 package io.api.carrent.core.ports.repositories.queries;
 
 import io.api.carrent.domain.dto.input.VehicleQueryDTO;
+import io.api.carrent.domain.dto.input.VehicleStatusQueryDTO;
 import io.api.carrent.domain.dto.output.VehicleDTO;
+import io.api.carrent.domain.dto.output.VehicleStatusDTO;
 
 import java.util.List;
 
 public interface IVehicleQueryRepository {
-    List<VehicleDTO> findAll(VehicleQueryDTO filter);
     VehicleDTO findById(Long vehicleId);
+    List<VehicleDTO> findAll(VehicleQueryDTO filter);
+    List<VehicleStatusDTO> findAllStatusHistory(VehicleStatusQueryDTO filter);
 }

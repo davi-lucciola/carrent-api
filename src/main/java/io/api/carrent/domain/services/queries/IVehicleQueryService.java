@@ -1,11 +1,13 @@
 package io.api.carrent.domain.services.queries;
 
 import io.api.carrent.domain.dto.input.VehicleQueryDTO;
+import io.api.carrent.domain.dto.input.VehicleStatusQueryDTO;
+import io.api.carrent.domain.dto.output.Pagination;
 import io.api.carrent.domain.dto.output.VehicleDTO;
-
-import java.util.List;
+import io.api.carrent.domain.dto.output.VehicleStatusDTO;
 
 public interface IVehicleQueryService {
-    List<VehicleDTO> findAll(VehicleQueryDTO filter);
     VehicleDTO findById(Long vehicleId);
+    Pagination<VehicleDTO> findAll(VehicleQueryDTO filter);
+    Pagination<VehicleStatusDTO> findAllStatus(VehicleStatusQueryDTO filter);
 }

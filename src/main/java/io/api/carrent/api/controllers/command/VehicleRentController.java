@@ -1,9 +1,9 @@
 package io.api.carrent.api.controllers.command;
 
 import io.api.carrent.domain.dto.input.*;
-import io.api.carrent.domain.services.command.IVehicleRentService;
 import io.api.carrent.domain.dto.output.MessageDTO;
 import io.api.carrent.domain.entities.User;
+import io.api.carrent.domain.services.command.IVehicleRentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,7 +15,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import static io.api.carrent.api.docs.SwaggerConstants.*;
+import static io.api.carrent.api.docs.SwaggerConstants.RENT_VEHICLE_TAG;
+import static io.api.carrent.api.docs.SwaggerConstants.SECURITY_BEARER;
 import static io.api.carrent.infra.security.SecurityConstants.ROLE_ADMIN;
 
 @Tag(name = RENT_VEHICLE_TAG)

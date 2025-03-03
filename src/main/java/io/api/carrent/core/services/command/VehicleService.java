@@ -4,10 +4,10 @@ import io.api.carrent.core.ports.repositories.command.IVehicleRepository;
 import io.api.carrent.core.ports.repositories.command.IVehicleTypeRepository;
 import io.api.carrent.domain.dto.input.SaveVehicleDTO;
 import io.api.carrent.domain.entities.Vehicle;
-import io.api.carrent.domain.services.command.IVehicleService;
 import io.api.carrent.domain.entities.VehicleType;
 import io.api.carrent.domain.exceptions.DomainException;
 import io.api.carrent.domain.exceptions.NotFoundException;
+import io.api.carrent.domain.services.command.IVehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

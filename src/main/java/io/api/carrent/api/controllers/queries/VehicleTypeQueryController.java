@@ -1,7 +1,7 @@
 package io.api.carrent.api.controllers.queries;
 
-import io.api.carrent.domain.services.queries.IVehicleTypeQueryService;
 import io.api.carrent.domain.dto.output.VehicleTypeDTO;
+import io.api.carrent.domain.services.queries.IVehicleTypeQueryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.api.carrent.api.docs.SwaggerConstants.*;
+import static io.api.carrent.api.docs.SwaggerConstants.SECURITY_BEARER;
+import static io.api.carrent.api.docs.SwaggerConstants.VEHICLE_TYPE_TAG;
 
 @Tag(name = VEHICLE_TYPE_TAG)
 @RestController

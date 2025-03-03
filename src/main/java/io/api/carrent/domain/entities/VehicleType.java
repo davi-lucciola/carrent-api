@@ -3,9 +3,11 @@ package io.api.carrent.domain.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
+@ToString
 @NoArgsConstructor
 @Table(name = "vehicle_types")
 public class VehicleType {

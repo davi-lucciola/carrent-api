@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class VehicleQueryServiceTest {
+public class VehicleQueryDTOServiceTest {
     @Mock
     private IVehicleQueryRepository vehicleQueryRepository;
 

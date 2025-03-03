@@ -1,8 +1,8 @@
 package io.api.carrent.domain.dto.output;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.api.carrent.domain.enums.RentStatus;
 import io.api.carrent.domain.enums.VehicleStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,17 +13,12 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehicleDTO {
+public class VehicleStatusDTO {
     private Long id;
-    private String plate;
-    private String brand;
-    private String model;
-    private Integer year;
-    private Float odometer;
     private VehicleStatus status;
-    private VehicleTypeDTO vehicleType;
-    private Boolean flActive;
-    private Instant createdAt;
+    private String renter;
+    private RentStatus rentStatus;
+    private Instant updatedAt;
 
     @JsonIgnore
     private Integer total;
@@ -36,8 +31,11 @@ public class VehicleDTO {
         this.status = VehicleStatus.valueOf(status);
     }
 
-    public void setVehicleType(String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        this.vehicleType = objectMapper.readValue(json, VehicleTypeDTO.class);
+    public String getRentStatus() {
+        return this.rentStatus != null ? this.rentStatus.getDescription() : null;
+    }
+
+    public void setRentStatus(String rentStatus) {
+        this.rentStatus = rentStatus != null ? RentStatus.valueOf(rentStatus) : null;
     }
 }
