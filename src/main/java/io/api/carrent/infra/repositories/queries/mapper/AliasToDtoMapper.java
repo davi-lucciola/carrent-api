@@ -1,5 +1,9 @@
 package io.api.carrent.infra.repositories.queries.mapper;
 
+import io.api.carrent.infra.repositories.queries.mapper.validations.CastingValidationChain;
+import io.api.carrent.infra.repositories.queries.mapper.validations.DoubleToFloat;
+import io.api.carrent.infra.repositories.queries.mapper.validations.FloatToDouble;
+import io.api.carrent.infra.repositories.queries.mapper.validations.TimestampToInstant;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.MappingException;
 import org.hibernate.query.TupleTransformer;
@@ -7,13 +11,12 @@ import org.hibernate.query.TupleTransformer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
 public class AliasToDtoMapper<T> implements TupleTransformer<T> {
     private final Class<T> dtoClass;
+    private final CastingValidationChain<?> castingValidationChain;
 
     @Override
     public T transformTuple(Object[] result, String[] aliases) {
@@ -70,7 +73,7 @@ public class AliasToDtoMapper<T> implements TupleTransformer<T> {
             var methods = dtoClass.getMethods();
 
             var setterMethod = Arrays.stream(methods)
-                    .filter(method -> method.getName().equals(setMethodName)).findAny();
+                    .filter(method -> method.getName().equals(setMethodName)).findFirst();
 
             if (setterMethod.isEmpty()) {
                 throw new NoSuchMethodException();
@@ -83,35 +86,15 @@ public class AliasToDtoMapper<T> implements TupleTransformer<T> {
     }
 
     private Object equivalentTypeMapping(Object value, Class fieldType) {
-        if (shouldCastToInstant(value, fieldType)) {
-            return ((Timestamp) value).toInstant();
-        } else if (shouldCastToFloat(value, fieldType)) {
-            return ((Double) value).floatValue();
-        } else if (shouldCastToDouble(value, fieldType)) {
-            return ((Float) value).doubleValue();
-        } else
-
-        return value;
+        return this.castingValidationChain.execute(value, fieldType);
     }
 
-    private boolean shouldCastToInstant(Object value, Class fieldType) {
-        return (
-            value.getClass().isAssignableFrom(Timestamp.class)
-            && Instant.class.isAssignableFrom(fieldType)
-        );
-    }
+    public static <T> AliasToDtoMapper<T> getInstance(Class<T> dtoClass) {
+        CastingValidationChain castingValidationChain = new DoubleToFloat()
+                .setNext(new FloatToDouble())
+                .setNext(new TimestampToInstant())
+                .setNext(null);
 
-    private boolean shouldCastToFloat(Object value, Class fieldType) {
-        return (
-            value.getClass().isAssignableFrom(Double.class)
-            && Float.class.isAssignableFrom(fieldType)
-        );
-    }
-
-    private boolean shouldCastToDouble(Object value, Class fieldType) {
-        return (
-            value.getClass().isAssignableFrom(Float.class)
-            && Double.class.isAssignableFrom(fieldType)
-        );
+        return new AliasToDtoMapper<>(dtoClass, castingValidationChain);
     }
 }

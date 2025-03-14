@@ -70,7 +70,7 @@ public class VehicleRentQueryRepository implements IVehicleRentQueryRepository {
         }
 
         return query.unwrap(org.hibernate.query.NativeQuery.class)
-                .setTupleTransformer(new AliasToDtoMapper<>(VehicleRentDTO.class))
+                .setTupleTransformer(AliasToDtoMapper.getInstance(VehicleRentDTO.class))
                 .getResultList();
     }
 
@@ -90,7 +90,7 @@ public class VehicleRentQueryRepository implements IVehicleRentQueryRepository {
                     .setParameter("rentId", rentId)
                     .setParameter("userId", user.getId())
                     .unwrap(org.hibernate.query.NativeQuery.class)
-                    .setTupleTransformer(new AliasToDtoMapper<>(VehicleRentDetailDTO.class))
+                    .setTupleTransformer(AliasToDtoMapper.getInstance(VehicleRentDetailDTO.class))
                     .getSingleResult();
 
             return Optional.of(result);

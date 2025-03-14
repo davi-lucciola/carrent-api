@@ -76,7 +76,7 @@ public class VehicleQueryRepository implements IVehicleQueryRepository {
         }
 
         return query.unwrap(org.hibernate.query.NativeQuery.class)
-                .setTupleTransformer(new AliasToDtoMapper<>(VehicleDTO.class))
+                .setTupleTransformer(AliasToDtoMapper.getInstance(VehicleDTO.class))
                 .getResultList();
     }
 
@@ -92,7 +92,7 @@ public class VehicleQueryRepository implements IVehicleQueryRepository {
                     .createNativeQuery(sql)
                     .setParameter("vehicleId", vehicleId)
                     .unwrap(org.hibernate.query.NativeQuery.class)
-                    .setTupleTransformer(new AliasToDtoMapper<>(VehicleDTO.class))
+                    .setTupleTransformer(AliasToDtoMapper.getInstance(VehicleDTO.class))
                     .getSingleResult();
 
             return Optional.of(result);
@@ -112,7 +112,7 @@ public class VehicleQueryRepository implements IVehicleQueryRepository {
                 .setParameter("page", filter.getPage())
                 .setParameter("perPage", filter.getPerPage())
                 .unwrap(org.hibernate.query.NativeQuery.class)
-                .setTupleTransformer(new AliasToDtoMapper<>(VehicleStatusDTO.class))
+                .setTupleTransformer(AliasToDtoMapper.getInstance(VehicleStatusDTO.class))
                 .getResultList();
     }
 }

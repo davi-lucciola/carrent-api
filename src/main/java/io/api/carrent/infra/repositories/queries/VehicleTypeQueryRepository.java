@@ -24,7 +24,7 @@ public class VehicleTypeQueryRepository implements IVehicleTypeQueryRepository {
         return entityManager
                 .createNativeQuery(sql)
                 .unwrap(org.hibernate.query.NativeQuery.class)
-                .setTupleTransformer(new AliasToDtoMapper<>(VehicleTypeDTO.class))
+                .setTupleTransformer(AliasToDtoMapper.getInstance(VehicleTypeDTO.class))
                 .getResultList();
     }
 }
