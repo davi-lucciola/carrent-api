@@ -19,8 +19,9 @@ The user rent the vehicle and picks up and return with an operator by given a se
 - 🏍️ Vehicle Types Management
 - 🛣️ Rent Vehicles by Default Users and Management by Admin Users
 - 🔁 Recurrent JOB to Cancel Expired Rent Solicitations
-- 🧪 Automated Unit Test 
 - 🐳 Dockerized development environment
+
+[//]: # (- 🧪 Automated Unit Test )
 
 ⸻
 
@@ -30,26 +31,34 @@ The user rent the vehicle and picks up and return with an operator by given a se
 
 ```
 carrent-api
-├── client/                # NextJS App
-│   ├── src/           
-│   │   ├── app/           # App Routing
-│   │   ├── components/    # Global Components
-│   │   ├── lib/           # Lib Modules
-│   │   └── modules/       # App modules separated by domain
-│   └── .env.exemple       # Env Variables Exemple
-│
-├── server/                # Flask APP
-│   ├── knockbankapi/      # API Module
-│   ├── migrations/        # Database Migrations
-│   ├── tests/             # Automated tests with Pytest
-│   └── .env.exemple       # Env Variables Exemple
+├── src/                                         # Source Code Folder
+│   ├── main/              
+│   │   ├── java
+│   │   │   └── io/api/carrent                   # Main Package Java Application
+│   │   │       ├── api                          # Api Layer Package to implements REST endpoints and Swagger Docs
+│   │   │       ├── app                          # App Layer Package to implement the domain services
+│   │   │       ├── domain                       # Domain Layer to implements entities and define the domain services interface
+│   │   │       ├── infra                        # Infra Layer to implements external services ports defined in app layer
+│   │   │       └── CarrentApplication.java      # Spring Boot Entrypoint
+│   │   └── resources
+│   │        ├── db/migration                    # Migrations with Flyway
+│   │        └── application.yml                 # Application Config File
+│   └── tests/                                   # Automated tests with JUnit
 │
 ├── docker-compose.yml			
 └── README.md
 ```
 </pre>
 
-⸻
+## 🏛️ Application Architecture
+
+I use Domain Driven Design and Hexagonal Architecture principles to build the API and isolate the domain (I don't completed isolate because that will be overengineering in this case)
+But all the business roles (Domain Services) are defined by "/domain/services" interfaces and implemented by my Application Services in "/app/services". 
+
+In the Application Services any external service is defined by a interface and implemented by the Infra Layer
+
+I also implemented Command Queries Responsibility Segregation (CQRS) to enable my API to separate what database will write and what will read scaling my databases horizontally (Besides now i am using only one database instance)
+
 
 ## 🪟 Demonstration
 
@@ -71,10 +80,14 @@ You can access the backend API docs at http://localhost:8080/swagger-ui/index.ht
 
 ⸻
 
-## 🧪 Run Tests
+[//]: # (## 🧪 Run Tests)
 
-Backend tests (pytest):
+[//]: # ()
+[//]: # (Backend tests &#40;pytest&#41;:)
 
-- cd server
-- uv sync
-- uv run pytest
+[//]: # ()
+[//]: # (- cd server)
+
+[//]: # (- uv sync)
+
+[//]: # (- uv run pytest)
