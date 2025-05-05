@@ -1,44 +1,80 @@
-# Carrent API
+# 🚗 CarrentAPI
 
-API para gerenciar uma frota de veículos e possibilitar o aluguel desses veículos.
+Carrent is a backend service that allows you to manage a fleet of vehicles and make them available for rent.
+The user rent the vehicle and picks up and return with an operator by given a security code.
 
-## Documentação
+## ⚙️ Tech Stack
 
-Para acessar a documentação do swagger localmente basta clicar [aqui](http://localhost:8080/swagger-ui/index.html).
+| Layer      | Tech                    |
+|------------|-------------------------|
+| Backend    | Java, Spring Boot, JPA  |
+| Database   | SQL Server (via Docker) |
+| DevOps  | Docker, Junit, Mockito  |
 
-Ou acessar o endereço abaixo:
-> http://localhost:8080/swagger-ui/index.html
+⸻
 
-## Tecnologias
+## 🚀 Features
+- 🔒 JWT-based authentication
+- 🚗 Vehicles Management
+- 🏍️ Vehicle Types Management
+- 🛣️ Rent Vehicles by Default Users and Management by Admin Users
+- 🔁 Recurrent JOB to Cancel Expired Rent Solicitations
+- 🧪 Automated Unit Test 
+- 🐳 Dockerized development environment
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+⸻
 
-## Funcionalidades
+## 📂 Project Structure
 
-### Backend
+<pre>
 
-- [x] Autenticação (Geral)
-  - [x] Cadastro de Usuários
-  - [x] Login (com JWT)
+```
+carrent-api
+├── client/                # NextJS App
+│   ├── src/           
+│   │   ├── app/           # App Routing
+│   │   ├── components/    # Global Components
+│   │   ├── lib/           # Lib Modules
+│   │   └── modules/       # App modules separated by domain
+│   └── .env.exemple       # Env Variables Exemple
+│
+├── server/                # Flask APP
+│   ├── knockbankapi/      # API Module
+│   ├── migrations/        # Database Migrations
+│   ├── tests/             # Automated tests with Pytest
+│   └── .env.exemple       # Env Variables Exemple
+│
+├── docker-compose.yml			
+└── README.md
+```
+</pre>
 
-- [x] Gerenciamento de Veículos (Admin)
-    - [x] CRUD de Veículos
-    - [x] CRUD de Tipos de Veículos
-    - [x] Listagem do Historico de Status do Veículo.
+⸻
 
-- [x] Aluguel de Veículos (Geral)
-  - [x] Solicitar aluguel do veículo (DISPONIVEL -> RESERVADO)
-  - [x] Cancelar da propria reserva (RESERVADO -> DISPONIVEL)
-  - [x] Listagem das proprias reservas
-  - [x] Ver códigos no detalhar de uma reserva somente quando ela foi realizada pelo proprio usuário
-  - [x] Job de Cancelamento de Reservas Expiradas
+## 🪟 Demonstration
 
-- [x] Aluguel de Veículos (Admin)
-    - [x] Confirmar reserva (RESERVADO -> ALUGADO)
-    - [x] Confirmar devolução (ALUGADO -> DISPONIVEL)
-    - [x] Cancelar reserva (RESERVADO -> DISPONIVEL)
-    - [x] Listagem das reservas
+## 🚀 Getting Started
+
+### 📦 Requirements
+	• Java 17
+	• Docker & Docker Compose
+
+⸻
+
+## 🐳 Start with Docker
+
+### Build and run everything
+
+`docker-compose up --build`
+
+You can access the backend API docs at http://localhost:8080/swagger-ui/index.html.
+
+⸻
+
+## 🧪 Run Tests
+
+Backend tests (pytest):
+
+- cd server
+- uv sync
+- uv run pytest
